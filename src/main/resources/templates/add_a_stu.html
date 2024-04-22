@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form action="insert a_stu" method="get">
+  <div>学号:<input th:name="stu_no"></div>
+  <div>姓名:<input th:name="stu_name" ></div>
+  <div>电话:<input th:name="tel"  ></div>
+  <div>地址:<input th:name="add"></div>
+  <div>年龄:<input th:name="age"></div>
+  <div>密码:<input th:name="stu_pwd" th:type="password"></div>
+  <div>班级号:
+    <select th:name="class_no">
+      <option th:each="c:${class_list}"
+              th:text="${c.class_name}"
+              th:value="${c.class_no}">
+
+      </option>
+    </select>
+  </div>
+  <div>专业:
+    <select th:name="pro_id">
+      <option th:each="p:${pro_list}"
+              th:text="${p.pro_name}"
+              th:value="${p.pro_id}"></option>
+    </select>
+  </div>
+  <div>
+    <input type="submit" th:value="提交">
+  </div>
+</form>
+</body>
+</html>

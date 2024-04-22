@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+      <form action="update_a_stu" method="get">
+        <div>学号：<input th:name="stu_no" th:value="${a_stu.stu_no}" readonly></div>
+        <div>姓名：<input th:name="stu_name" th:value="${a_stu.stu_name}"></div>
+        <div>电话：<input th:name="tel" th:value="${a_stu.tel}"></div>
+        <div>地址：<input th:name="add" th:value="${a_stu.add}"></div>
+        <div>班级号：
+            <select th:name="class_no">
+                <option th:each="c:${class_list}"
+                        th:text="${c.class_name}"
+                        th:value="${c.class_no}"
+                        th:selected="${c.class_no} eq ${a_stu.class_no}">
+
+                </option>
+            </select>
+        </div>
+          <div>专业：
+              <select th:name="pro_id">
+                  <option th:each="p:${pro_list}"
+                          th:text="${p.pro_name}"
+                          th:value="${p.pro_id}"
+                          th:selected="${p.pro_id} eq ${a_stu.pro_id}">
+
+                  </option>
+              </select>
+          </div>
+          <div>
+              <input type="submit" th:value="保存">
+          </div>
+      </form>
+</body>
+</html>

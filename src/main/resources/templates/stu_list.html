@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+      <div>学生列表</div>
+      <div>
+          <form action="qry_stu_list" method="get">
+              <div>
+                  查询字段：
+                  <select th:name="colum_name">
+                      <option th:value="stu_no" th:text="学号"></option>
+                      <option th:value="stu_name" th:text="姓名"></option><!--查询条件就二个-->
+                  </select>
+                  <input type="text" th:name="qry_condition">
+                  <input type="submit" value="查询">
+              </div>
+          </form>
+      </div>
+      <div>
+        <table>
+          <tr>
+              <th>序号</th>
+              <th>学号</th>
+              <th>姓名</th>
+              <th>电话</th>
+              <th>地址</th>
+              <th>年龄</th>
+              <th>班级号</th>
+              <th>班级名</th>
+              <th>专业名</th>
+              <th>操作</th>
+          </tr>
+
+          <tr th:each="stu,status:${stu_list}"> <!--这个stu_list就是请求对应函数的model传递过来的-->
+              <td th:text="${status.index + 1}"></td>
+              <td th:text="${stu.stu_no}"></td>
+              <td th:text="${stu.stu_name}"></td>
+              <td th:text="${stu.tel}"></td>
+              <td th:text="${stu.add}"></td>
+              <td th:text="${stu.age}"></td>
+              <td th:text="${stu.class_no}"></td>
+              <td th:text="${stu.class_name}"></td>
+              <td th:text="${stu.pro_name}"></td>
+            <td>
+              <a th:href="@{show_edit_a_stu(stu_no=${stu.stu_no})}" th:text="修改"></a>
+              <a th:href="@{delect_a_stu(stu_no=${stu.stu_no})}" th:text="删除"></a>
+            </td>
+          </tr>
+        </table>
+        <a th:href="@{show_add_a_stu}" th:text="添加"></a>
+      </div>
+</body>
+</html>
