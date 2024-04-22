@@ -66,7 +66,9 @@ public class StudentService {
         return stuMapper.deleteAStudent(stu_no);
     }
 
-    public List<Studentinfo> getqryList(String list_no, String stu_no) {
-        return stuMapper.selectAStu(list_no,stu_no);
+    public List<Studentinfo> getStuList(String colum_name, String qry_condition) {
+        String whereCondtion = "where 1=1";
+        whereCondtion += "   and   " + colum_name + " like '%"+qry_condition+"%'";
+        return stuMapper.selectAStu(whereCondtion);
     }
 }

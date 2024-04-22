@@ -45,10 +45,10 @@ public interface StudentMapper {
     int deleteAStudent( @Param("stu_no") String stu_no);
 
 
-    @Select("SELECT si.* ,ci.class_name, pi.pro_name\n" +
-            "            from student_info si INNER JOIN class_info ci on ci.class_no = si.class_no\n" +
-            "            INNER JOIN pro_info pi on pi.pro_id = si.pro_id\n" +
-            "            where si.${type} =#{value} and student_status=1")
-    List<Studentinfo> selectAStu(@Param("type") String list_no,
-                                 @Param("value")String stu_no);
+    @Select("SELECT si.* , ci.class_name,pi.pro_name\n" +
+            "\tFROM student_info si\n" +
+            "\t\tINNER JOIN class_info ci ON ci.class_no=si.class_no\n" +
+            "\t\tINNER JOIN pro_info pi ON pi.pro_id = si.pro_id \n" +
+            "\t\t ${whereColumn} ")
+    List<Studentinfo> selectAStu(@Param("whereColumn") String whereColumn);
 }

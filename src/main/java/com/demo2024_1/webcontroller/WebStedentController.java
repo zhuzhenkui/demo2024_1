@@ -67,15 +67,21 @@ public class WebStedentController {
     public String showStuList(HttpServletRequest request, Model model){
 
         //从前端取数据，不用管用不用
-        int classNo = Integer.parseInt(request.getParameter("class_no"));
-        System.out.println("+++"+classNo);
+//        int classNo = Integer.parseInt(request.getParameter("class_no"));
+//        System.out.println("+++"+classNo);
         //调用service层对应的类的对象，用model打包传递给前端网页
 
-        List<Studentinfo> stuList;
-        stuList=stuService.getStuList(classNo);
+        String colum_name = request.getParameter("colum_name");
+        String qry_condition = request.getParameter("qry_condition");
 
+        System.out.println("前端传过来的数据："+colum_name+"---"+qry_condition);
+
+        List<Studentinfo> stuList;
+//                stuList=stuService.getStuList(1);
+        stuList = stuService.getStuList(colum_name,qry_condition);
         //把返回值进行处理，用model打包传给网页
         model.addAttribute("stu_list",stuList);
+
         return "stu_list";
     }
 
@@ -187,20 +193,24 @@ public class WebStedentController {
         }
 
     }
-    @RequestMapping("qry_stu_list")
-    public String qryStuList(HttpServletRequest request,Model model){
-        String list_no = request.getParameter("colum_name");
-        String stu_no = request.getParameter("qry_condition");
-
-        System.out.println("666"+stu_no);
-        System.out.println("666"+list_no);
-
-
-        List<Studentinfo> stuList;
-        stuList=stuService.getqryList(list_no,stu_no);
-
-        //把返回值进行处理，用model打包传给网页
-        model.addAttribute("stu_list",stuList);
-        return "stu_list";
-    }
+//    @RequestMapping("qry_stu_list")
+//    public String qryStuList(HttpServletRequest request,Model model){
+//
+//        String list_no = request.getParameter("colum_name");
+//        String stu_no = request.getParameter("qry_condition");
+//
+//        System.out.println("666"+stu_no);
+//        System.out.println("666"+list_no);
+//
+//
+//        List<Studentinfo> stuList;
+//        stuList=stuService.getqryList(list_no,stu_no);
+//
+//        //把返回值进行处理，用model打包传给网页
+//        model.addAttribute("stu_list",stuList);
+//        return "stu_list";
+//
+//
+//
+//    }
 }

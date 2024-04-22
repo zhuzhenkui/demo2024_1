@@ -7,12 +7,17 @@
 <body>
       <div>学生列表</div>
       <div>
-          <form action="qry_stu_list" method="get">
+          <form action="show_stu_list" method="get">
               <div>
                   查询字段：
                   <select th:name="colum_name">
                       <option th:value="stu_no" th:text="学号"></option>
                       <option th:value="stu_name" th:text="姓名"></option><!--查询条件就二个-->
+                      <option th:value="tel" th:text="电话"></option><!--查询条件就二个-->
+                      <option th:value="add" th:text="地址"></option>
+                      <option th:value="class_no" th:text="班级号"></option>
+                      <option th:value="class_name" th:text="班级名"></option>
+                      <option th:value="pro_name" th:text="专业名"></option>
                   </select>
                   <input type="text" th:name="qry_condition">
                   <input type="submit" value="查询">
