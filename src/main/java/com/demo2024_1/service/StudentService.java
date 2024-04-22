@@ -66,9 +66,19 @@ public class StudentService {
         return stuMapper.deleteAStudent(stu_no);
     }
 
-    public List<Studentinfo> getStuList(String colum_name, String qry_condition) {
+    public List<Studentinfo> getStuList(String colum_name, String qry_condition, int current_page, int page_size) {
         String whereCondtion = "where 1=1";
-        whereCondtion += "   and   " + colum_name + " like '%"+qry_condition+"%'";
+        if(colum_name.equals("class_no")){
+            whereCondtion += "   and  ci. " + colum_name + " like '%"+qry_condition+"%'";
+        }else{
+            whereCondtion += "   and   " + colum_name + " like '%"+qry_condition+"%'";
+        }
+        if(current_page <= 0){
+            current_page = 1;
+        }
+        int pos = (current_page-1) * page_size;
+        whereCondtion += " limit "+pos+",  "+page_size;
+        System.out.println(whereCondtion);
         return stuMapper.selectAStu(whereCondtion);
     }
 }

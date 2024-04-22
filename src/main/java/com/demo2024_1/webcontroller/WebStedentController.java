@@ -74,13 +74,26 @@ public class WebStedentController {
         String colum_name = request.getParameter("colum_name");
         String qry_condition = request.getParameter("qry_condition");
 
+
+        //修改了原来的程序，传入参数变成了4个。
+        int current_page = Integer.parseInt(request.getParameter("current_page"));
+        int page_size = Integer.parseInt(request.getParameter("page_size"));
+
+
+        System.out.println("当前页码："+current_page+"---每页显示条数："+page_size);
         System.out.println("前端传过来的数据："+colum_name+"---"+qry_condition);
+
 
         List<Studentinfo> stuList;
 //                stuList=stuService.getStuList(1);
-        stuList = stuService.getStuList(colum_name,qry_condition);
+        stuList = stuService.getStuList(colum_name,qry_condition,current_page,page_size);
         //把返回值进行处理，用model打包传给网页
         model.addAttribute("stu_list",stuList);
+
+        model.addAttribute("colum_name",colum_name);
+        model.addAttribute("qry_condition",qry_condition);
+        model.addAttribute("current_page",current_page<=0?1:current_page);
+        model.addAttribute("page_size",page_size);
 
         return "stu_list";
     }

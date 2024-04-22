@@ -9,6 +9,9 @@
       <div>
           <form action="show_stu_list" method="get">
               <div>
+                  <input type="hidden" th:name="current_page" th:value="1"/>
+                  <input type="hidden" th:name="page_size" th:value="10"/>
+              <div>
                   查询字段：
                   <select th:name="colum_name">
                       <option th:value="stu_no" th:text="学号"></option>
@@ -55,6 +58,12 @@
             </td>
           </tr>
         </table>
+          <div>
+              <a th:href="@{show_stu_list(current_page=${current_page-1},page_size=${page_size},colum_name=${colum_name},qry_condition=${qry_condition})}" th:text="上一页"></a>
+          </div>
+          <div>
+              <a th:href="@{show_stu_list(current_page=${current_page+1},page_size=${page_size},colum_name=${colum_name},qry_condition=${qry_condition})}" th:text="下一页"></a>
+          </div>
         <a th:href="@{show_add_a_stu}" th:text="添加"></a>
       </div>
 </body>
